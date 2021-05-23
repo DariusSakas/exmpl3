@@ -14,4 +14,12 @@ public class Agent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private Integer salary;
+    private Integer age;
+
+    public Agent(String name, Integer salary, Integer age) {
+        this.name = name;
+        this.salary = salary;
+        this.age = age;
+    }
 }

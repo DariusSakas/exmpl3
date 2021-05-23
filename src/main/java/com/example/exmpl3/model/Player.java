@@ -23,4 +23,9 @@ public class Player {
     private Integer age;
     private Integer salary;
 
+    public Player(String name, Integer age, Integer salary) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+    }
 }

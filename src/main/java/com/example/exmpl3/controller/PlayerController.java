@@ -29,10 +29,31 @@ public class PlayerController {
     public List<Player> getplayers() {
         return playerService.getPlayerList();
     }
+    @GetMapping("/players/{id}")
+    public Player getPlayerById(@PathVariable int id ){
+        return playerService.getPlayerList().stream().filter(player -> player.getId() == id).findAny().orElse(null);
+    }
+
     @PostMapping("/players")
     public Player addPlayer(@RequestBody Player player){
         playerService.addPlayer(player);
         return player;
     }
 
+    @PutMapping("/players/{id}")
+    public Player playerList(@RequestBody Player playerToUpdate){
+       Player player = playerService.getPlayerList().stream().filter(plr -> plr.getId() == playerToUpdate.getId()).findAny().orElse(null);
+
+        player.setName(playerToUpdate.getName());
+        player.setAge(playerToUpdate.getAge());
+        player.setSalary(playerToUpdate.getSalary());
+
+       return player;
+    }
+    @DeleteMapping("/products/{playerToDelete}")
+    public List<Player> removePlayer (@PathVariable int playerToDelete){
+        Player player = playerService.getPlayerList().stream().filter(plr -> plr.getId() == playerToDelete).findAny().get();
+        playerService.getPlayerList().remove(player);
+        return playerService.getPlayerList();
+    }
 }

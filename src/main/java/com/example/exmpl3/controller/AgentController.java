@@ -5,6 +5,7 @@ import com.example.exmpl3.service.AgentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,12 @@ public class AgentController {
 
     @GetMapping("/")
     public List<Agent> getAgents(){
-        log.info("Fetching AGENTS from DB ");
+        log.info("Fetching AGENTS from DB");
         return agentService.getAgents();
+    }
+    @GetMapping("/{id}")
+    public Agent getAgentById(@PathVariable Long id){
+        log.info("Fetching AGENT from AGENT list");
+        return agentService.getAgentById(id);
     }
 }

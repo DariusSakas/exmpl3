@@ -16,4 +16,8 @@ public class AgentService {
     public List<Agent> getAgents(){
         return agentRepository.findAll();
     }
+
+    public Agent getAgentById(Long id ){
+        return agentRepository.findById(id).get();
+    }
 }

@@ -50,7 +50,7 @@ public class PlayerController {
 
        return player;
     }
-    @DeleteMapping("/products/{playerToDelete}")
+    @DeleteMapping("/players/{playerToDelete}")
     public List<Player> removePlayer (@PathVariable int playerToDelete){
         Player player = playerService.getPlayerList().stream().filter(plr -> plr.getId() == playerToDelete).findAny().get();
         playerService.getPlayerList().remove(player);

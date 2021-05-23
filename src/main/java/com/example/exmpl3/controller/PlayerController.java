@@ -3,7 +3,6 @@ package com.example.exmpl3.controller;
 import com.example.exmpl3.model.Player;
 import com.example.exmpl3.service.PlayerService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +13,8 @@ import java.util.List;
 public class PlayerController {
 
     private final PlayerService playerService;
+
+    //Logger logger = LoggerFactory.getLogger(PlayerController.class);
 
 //    @Autowired
 //    public void setPlayerService(PlayerService playerService) {
@@ -52,7 +53,7 @@ public class PlayerController {
     }
     @DeleteMapping("/players/{playerToDelete}")
     public List<Player> removePlayer (@PathVariable int playerToDelete){
-        Player player = playerService.getPlayerList().stream().filter(plr -> plr.getId() == playerToDelete).findAny().get();
+        Player player = playerService.getPlayerList().stream().filter(plr -> plr.getId() == playerToDelete).findAny().orElse(null);
         playerService.getPlayerList().remove(player);
         return playerService.getPlayerList();
     }

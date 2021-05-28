@@ -3,15 +3,22 @@ package com.example.exmpl3.controller;
 import com.example.exmpl3.model.Player;
 import com.example.exmpl3.service.PlayerService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Acces all players by /players/ now (was /lkl/players/)
+ *
+ */
+
 @RestController
-@RequestMapping("/lkl/")
+@RequestMapping("/api/players/")
 @AllArgsConstructor
 public class PlayerController {
 
+    @Autowired
     private final PlayerService playerService;
 
     //Logger logger = LoggerFactory.getLogger(PlayerController.class);
@@ -26,22 +33,22 @@ public class PlayerController {
 //        this.playerService = playerService;
 //    }
 
-    @GetMapping("/players")
+    @GetMapping("/")
     public List<Player> getplayers() {
         return playerService.getPlayerList();
     }
-    @GetMapping("/players/{id}")
+    @GetMapping("/{id}")
     public Player getPlayerById(@PathVariable int id ){
         return playerService.getPlayerList().stream().filter(player -> player.getId() == id).findAny().orElse(null);
     }
 
-    @PostMapping("/players")
+    @PostMapping("/")
     public Player addPlayer(@RequestBody Player player){
         playerService.addPlayer(player);
         return player;
     }
 
-    @PutMapping("/players/{id}")
+    @PutMapping("/{id}")
     public Player playerList(@RequestBody Player playerToUpdate){
        Player player = playerService.getPlayerList().stream().filter(plr -> plr.getId() == playerToUpdate.getId()).findAny().orElse(null);
 
@@ -51,7 +58,7 @@ public class PlayerController {
 
        return player;
     }
-    @DeleteMapping("/players/{playerToDelete}")
+    @DeleteMapping("/{playerToDelete}")
     public List<Player> removePlayer (@PathVariable int playerToDelete){
         Player player = playerService.getPlayerList().stream().filter(plr -> plr.getId() == playerToDelete).findAny().orElse(null);
         playerService.getPlayerList().remove(player);
